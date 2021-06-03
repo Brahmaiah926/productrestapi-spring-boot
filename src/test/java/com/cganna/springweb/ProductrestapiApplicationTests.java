@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.client.RestTemplate;
 
 import com.cganna.springweb.entities.Product;
@@ -16,6 +17,7 @@ class ProductrestapiApplicationTests {
 	@Value("${productrestapi.services.url}")
 	private String baseURL;
 
+	@Profile("dev")
 	@Test
 	public void testGetProduct() {
 		System.out.println("The BaseURL is" + baseURL);
@@ -26,6 +28,7 @@ class ProductrestapiApplicationTests {
 		assertNotNull(product);
 	}
 
+	@Profile("dev")
 	@Test
 	public void testCreateProduct() {
 		System.out.println("The BaseURL is" + baseURL);
@@ -45,7 +48,9 @@ class ProductrestapiApplicationTests {
 		assertEquals("Trimmer", testProduct.getName());
 	}
 
+	
 	@Test
+	@Profile("dev")
 	public void testUpdateProduct() {
 
 		RestTemplate restTemplate = new RestTemplate();
